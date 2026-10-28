@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>وزارة الداخلية العراقية</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="gis-header">
+  <div class="gis-brand">
+    <img id="logo" src="logo.png" alt="شعار وزارة الداخلية العراقية" class="gis-logo">
+    <h1>وزارة الداخلية العراقية</h1>
+  </div>
+  <button id="btnLang" class="btn btn-ghost" type="button">English</button>
+</header>
+
+<main class="gis-main">
+  <div id="toast" class="gis-toast" role="status" hidden></div>
+
+  <section class="gis-stats" id="stats"></section>
+
+  <section class="gis-card">
+    <div class="map-bar"><label><span data-i18n="missionLbl"></span><select id="fMission"></select></label></div>
+    <div id="map" class="gis-map"></div>
+    <p class="gis-note" data-i18n="mapHint"></p>
+  </section>
+
+  <section class="gis-card">
+    <h2 data-i18n="addTitle"></h2>
+    <div class="gis-form" id="incForm">
+      <label><span data-i18n="f_id"></span><input id="f_id" readonly></label>
+      <label><span data-i18n="f_title"></span><input id="f_title"></label>
+      <label><span data-i18n="f_type"></span><select id="f_type"></select></label>
+      <label><span data-i18n="f_mission"></span><select id="f_mission"></select></label>
+      <label><span data-i18n="f_area"></span><input id="f_area"></label>
+      <label class="wide"><span data-i18n="f_xy"></span><input id="f_xy" dir="ltr" placeholder="33.3152, 44.3661"></label>
+      <label class="wide"><span data-i18n="f_mgrs"></span><input id="f_mgrs" dir="ltr" placeholder="38S MB 40994 86410"></label>
+      <label><span data-i18n="f_date"></span><input id="f_date" type="date"></label>
+      <label><span data-i18n="f_sev"></span>
+        <select id="f_sev"><option value="low"></option><option value="medium"></option><option value="high"></option><option value="critical"></option></select></label>
+      <label><span data-i18n="f_status"></span>
+        <select id="f_status"><option value="open"></option><option value="in_progress"></option><option value="closed"></option></select></label>
+      <label class="wide"><span data-i18n="f_desc"></span><input id="f_desc"></label>
+      <label class="wide"><span data-i18n="f_notes"></span><input id="f_notes"></label>
+      <label class="wide"><span data-i18n="f_img"></span><input id="f_img" type="file" accept="image/*"></label>
+    </div>
+    <div class="gis-actions">
+      <button id="btnAdd" class="btn btn-primary" type="button" data-i18n="add"></button>
+      <button id="btnUpdate" class="btn" type="button" data-i18n="update" disabled></button>
+      <button id="btnDelete" class="btn btn-danger" type="button" data-i18n="delete" disabled></button>
+      <button id="btnClear" class="btn btn-ghost" type="button" data-i18n="clear"></button>
+      <button id="btnLocate" class="btn btn-ghost" type="button" data-i18n="locate"></button>
+    </div>
+  </section>
+
+  <section class="gis-card">
+    <h2 data-i18n="dataTitle"></h2>
+    <div class="gis-actions">
+      <label class="btn btn-primary">
+        <span data-i18n="importXl"></span>
+        <input id="fileXlsx" type="file" accept=".xlsx,.xls,.csv" hidden>
+      </label>
+      <button id="btnCsv" class="btn" type="button" data-i18n="exportCsv"></button>
+      <button id="btnJson" class="btn" type="button" data-i18n="exportJson"></button>
+      <label class="btn">
+        <span data-i18n="importJson"></span>
+        <input id="fileJson" type="file" accept=".json" hidden>
+      </label>
+    </div>
+    <p class="gis-note" data-i18n="localNote"></p>
+    <div id="importReport" class="gis-report" hidden></div>
+  </section>
+
+  <section class="gis-card">
+    <h2 data-i18n="listTitle"></h2>
+    <div class="gis-filters">
+      <input id="q" data-i18n-ph="search">
+      <select id="fType"></select>
+      <select id="fArea"></select>
+      <select id="fSev"></select>
+      <select id="fStatus"></select>
+      <input id="fFrom" type="date">
+      <input id="fTo" type="date">
+    </div>
+    <div class="gis-table-wrap">
+      <table class="gis-table">
+        <thead><tr id="thead"></tr></thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+    <p id="emptyMsg" class="gis-note" hidden></p>
+  </section>
+
+  <section class="gis-card">
+    <h2 data-i18n="chartsTitle"></h2>
+    <p id="chartMsg" class="gis-note" hidden></p>
+    <div class="gis-charts">
+      <div class="chart-box"><canvas id="cType"></canvas></div>
+      <div class="chart-box"><canvas id="cArea"></canvas></div>
+      <div class="chart-box"><canvas id="cSev"></canvas></div>
+      <div class="chart-box"><canvas id="cStatus"></canvas></div>
+      <div class="chart-box wide"><canvas id="cDate"></canvas></div>
+    </div>
+  </section>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
